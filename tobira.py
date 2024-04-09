@@ -8,17 +8,17 @@ class Tobira:
 
     def __init__(self):
         self.question = week1[random.randint(0, len(week1) - 1)]
+    if active_quiz = 'tobira':
+        qnum = 0
+        anum = 1
 
     def tobfunc(self, message):
         global new_question
         p_message = message.content.lower()
-        print('p_message = ' + p_message)
-        print('self.question = ' + self.question[0])
         if (p_message == 'tobira'):
-            return 'Write the word in hiragana:\n' + self.question[0]
-        elif (p_message == self.question[1]):
-            print('heyo')
+            return 'Write the word in hiragana:\n' + self.question[qnum]
+        elif (p_message == self.question[anum]):
             if (new_question == True):
-                self.question = week1[random.randint(0, len(week1) - 1)]
-            return self.question[0]
+                self.question = week1[random.randint(qnum, len(week1) - anum)]
+            return self.question[qnum]
         return

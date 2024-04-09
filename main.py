@@ -41,7 +41,7 @@ async def on_message(message):
             tobira_timer = False
             new_question = True
             if (response != None):
-                winn:winners_printers_print = ''
+                winners_printers_print = ''
                 for x in winners:
                     winners_print += '\n' + x
                 if winner == True:
