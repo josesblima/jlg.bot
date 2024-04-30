@@ -1,22 +1,21 @@
-import discord
+from quiz import Quiz
 from tobira import Tobira
 
-active_quiz = ''
-reply = None
-question = None
-instance = None
-def  get_response(message):
-    global instance
-    global active_quiz
-    p_message = message.content.lower()
+class Responder:
+    def __init__(self):
+        self.quiz_active_bool = False
+        self.quiz_instance = None
+    def get_response(self, message):
+        p_message = message.content.lower()
 
-    if (p_message == 'hi'):
-        return 'Hello!'
-    if (p_message == 'tobira'):
-        active_quiz = 'tobira'
-        instance = Tobira()
-    if (active_quiz == 'tobira'):
-        return instance.tobfunc(message), active_quiz
+        if (self.quiz_active_bool == True):
+            print("get_response first if\n")
+            return self.quiz_instance.quiz_handler(message)
 
-
-
+        elif (self.quiz_active_bool != True):
+            if (p_message == 'tobira'):
+                # Callfunction to start Quiz
+                print("tobira did this print???\n")
+                self.quiz_active_bool = True
+                self.quiz_instance = Quiz()
+                return self.quiz_instance.quiz_starter(message)
