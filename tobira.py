@@ -1,6 +1,7 @@
 import random
 
-tobira_questions = [(1, 'one'), (2, 'two')]
+tobira_questions = [('1', 'one'), ('2', 'two')]
+rand_quest = 0
 
 class Tobira:
     def __init__(self):
@@ -9,7 +10,7 @@ class Tobira:
 
     # Function that fetches new question
     def get_new_question(self):
-        rand_quest = random.randint(0, len(tobira_questions - 1))
+        rand_quest = random.randint(0, (len(tobira_questions) - 1))
         self.question = tobira_questions[rand_quest][0]
         self.answer = tobira_questions[rand_quest][1]
         return (self.question)
