@@ -22,7 +22,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    response = responder_class.get_response(message)
+    response = await responder_class.get_response(message)
     if (response):
         await message.channel.send(response)
 

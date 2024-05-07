@@ -1,23 +1,31 @@
 import random
+from n3 import tobira_questions
+# tobira_questions = [('1', 'one'), ('2', 'two')]
 
-tobira_questions = [('1', 'one'), ('2', 'two')]
 rand_quest = 0
 
 class Tobira:
     def __init__(self):
         self.question = tobira_questions[random.randint(0, len(tobira_questions) - 1)][0]
         self.answer = tobira_questions[random.randint(0, len(tobira_questions) - 1)][1]
+        self.meaning = tobira_questions[random.randint(0, len(tobira_questions) - 1)][2]
+
 
     # Function that fetches new question
     def get_new_question(self):
         rand_quest = random.randint(0, (len(tobira_questions) - 1))
         self.question = tobira_questions[rand_quest][0]
         self.answer = tobira_questions[rand_quest][1]
+        self.meaning = tobira_questions[rand_quest][2]
         return (self.question)
 
-    # Gets answer
+    def get_question(self):
+        return self.question
     def get_answer(self):
         return self.answer
+    def get_meaning(self):
+        return self.meaning
+
     # Checks if answer is right
     def check_answer(self, message):
         p_message = message.content.lower()

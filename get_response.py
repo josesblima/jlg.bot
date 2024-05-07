@@ -5,12 +5,12 @@ class Responder:
     def __init__(self):
         self.quiz_active_bool = False
         self.quiz_instance = None
-    def get_response(self, message):
+    async def get_response(self, message):
         p_message = message.content.lower()
 
         if (self.quiz_active_bool == True):
             print("get_response first if\n")
-            return self.quiz_instance.quiz_handler(message)
+            return await self.quiz_instance.quiz_handler(message)
 
         elif (self.quiz_active_bool != True):
             if (p_message == 'tobira'):
