@@ -18,7 +18,7 @@ class Database:
         self.database.commit()
         self.cursor.execute(f'SELECT * FROM levels WHERE user_id = "{user_name}"')
         pdata = self.cursor.fetchone()
-        return f'Genius! You have gained {xp} xp and {zeni} 銭(zeni).\n{pdata[0]} - {pdata[1]} xp - {pdata[-1]} 銭'
+        return f'Genius! You have gained {xp} xp and {zeni} 銭(zeni)' # {pdata[0]} - {pdata[1]} xp - {pdata[-1]} 銭'
 
 
     def player_data(self, user_id):

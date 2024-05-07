@@ -11,7 +11,7 @@ class Quiz:
         self.total_scores = {}
         self.total_scores_str = "Quiz ended, congratulations!"
         self.end = False
-        self.quiz_len = 10
+        self.quiz_len = 2
         self.db = Database()
     def quiz_starter(self, message):
         p_message = message.content.lower()
@@ -67,10 +67,10 @@ class Quiz:
             self.end = False
             for key, val in self.total_scores.items():
                 self.total_scores_str += "\n" + key + ": " + str(val) + " points"
-            return self.db.xpgold_update(message.author, 1, 1) + "\n" + self.total_scores_str + "\n" + self.correct_answer_users_str
+            return self.db.xpgold_update(message.author, 1, 1) + "\n" + self.total_scores_str
         print("right BEFORE return")
         question = self.active_quiz.get_question()        
         answer = self.active_quiz.get_answer()        
         meaning = self.active_quiz.get_meaning()
         self.correct_answer_users_str += "\n" + self.active_quiz.get_new_question()
-        return question + ": " + answer + " -- " + meaning + "\n" + self.db.xpgold_update(message.author, 1, 1) + "\n" + self.correct_answer_users_str
+        return question + ": " + answer + " -- " + meaning + "\n" + self.db.xpgold_update(message.author, 1, 1) + self.correct_answer_users_str
