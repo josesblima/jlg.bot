@@ -16,7 +16,7 @@ class Responder:
             return self.dictionary.jisho(message)
 
         if (p_message == 'help'):
-            return "Welcome to the JLG.BOT!\nYou can use the following commands:\nhelp - brings up this menu\ntobira - starts the tobira quiz\nskip - skips question\nstats - checks your stats\n"
+            return "Welcome to the JLG.BOT!\nYou can use the following commands:\nhelp - brings up this menu\nn5 - starts the n5 quiz (works for all other jlpt levels)\nskip - skips question\nendquiz - ends quiz\n??辞書 - searches the word after the ?? on jisho.org\nstats - checks your stats\n"
         elif (p_message == 'stats'):
             db = Database()
             return db.player_data(message.author)
