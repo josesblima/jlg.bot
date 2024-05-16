@@ -1,4 +1,4 @@
-from tobira import Tobira
+from questions import Questions
 from database import Database
 import asyncio
 
@@ -13,11 +13,42 @@ class Quiz:
         self.end = False
         self.quiz_len = 2
         self.db = Database()
+
+    def end_quiz(self):
+        self.active_quiz = None
+        self.timer_sleep = False
+        self.correct_answer_users_set = set()
+        self.correct_answer_users_str = ""
+        self.total_scores = {}
+        self.total_scores_str = "Quiz ended, congratulations!"
+        self.end = False
+
     def quiz_starter(self, message):
         p_message = message.content.lower()
-        if (p_message == 'tobira'):
-            self.active_quiz = Tobira()
+        if (p_message == 'n5'):
+            self.active_quiz = Questions()
             print("quiz_starter\n")
+            self.active_quiz.n5()
+            return self.active_quiz.get_new_question()
+        if (p_message == 'n4'):
+            self.active_quiz = Questions()
+            print("quiz_starter\n")
+            self.active_quiz.n4()
+            return self.active_quiz.get_new_question()
+        if (p_message == 'n3'):
+            self.active_quiz = Questions()
+            print("quiz_starter\n")
+            self.active_quiz.n3()
+            return self.active_quiz.get_new_question()
+        if (p_message == 'n2'):
+            self.active_quiz = Questions()
+            print("quiz_starter\n")
+            self.active_quiz.n2()
+            return self.active_quiz.get_new_question()
+        if (p_message == 'n1'):
+            self.active_quiz = Questions()
+            print("quiz_starter\n")
+            self.active_quiz.n1()
             return self.active_quiz.get_new_question()
 
     async def quiz_handler(self, message):

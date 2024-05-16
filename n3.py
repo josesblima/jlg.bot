@@ -1,4 +1,4 @@
-tobira_questions = [('1', 'one', 'this is the definition of one'),
+n3 = [('1', 'one', 'this is the definition of one'),
                     ('2', 'two', 'this is the definition of two')]
     # ("明かり", "あかり", "light; illumination; glow; gleam"),
     # ("明ける", "あける", "to dawn; to become daylight"),
