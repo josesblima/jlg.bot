@@ -32,10 +32,21 @@ class Responder:
             print("quiz handler being called from get_response\n")
             return await self.quiz_instance.quiz_handler(message)
 
-        elif (self.quiz_active_bool != True):
+        elif (self.quiz_active_bool == False):
             if (p_message == 'n5' or p_message == 'n4' or p_message =='n3' or p_message == 'n2' or p_message == 'n1'):
                 # Callfunction to start Quiz
                 print("It's starting one  of the nquizzes\n")
                 self.quiz_active_bool = True
                 self.quiz_instance = Quiz()
                 return self.quiz_instance.quiz_starter(message)
+
+            elif (p_message[:2] == 'n5' or p_message[:2] == 'n4' or p_message[:2] =='n3' or p_message[:2] == 'n2' or p_message[:2] == 'n1'):
+                split_message = p_message.split()
+ 
+                if split_message[1] == 'challenge':
+                    self.quiz_instance = Quiz()
+                    return self.quiz_instance.challenge_starter(message, split_message)
+                
+                elif split_message[1] == 'accept':
+                    self.quiz_active_bool = True
+                    return self.quiz_instance.challenge_starter(message, split_message)

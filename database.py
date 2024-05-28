@@ -20,6 +20,9 @@ class Database:
         pdata = self.cursor.fetchone()
         return f'Genius! You have gained {xp} xp and {zeni} 銭(zeni)' # {pdata[0]} - {pdata[1]} xp - {pdata[-1]} 銭'
 
+    def check_zeni(self, user_id):
+        self.cursor.execute(f'SELECT zeni FROM levels WHERE user_id = "{user_id}"')
+        return self.cursor.fetchone()[0]
 
     def player_data(self, user_id):
         self.cursor.execute(f'SELECT * FROM levels WHERE user_id = "{user_id}"')
