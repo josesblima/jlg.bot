@@ -8,6 +8,12 @@ class Responder:
         self.quiz_active_bool = False
         self.quiz_instance = None
         self.dictionary = Jisho()
+
+    def quiz_active_bool_toggle(self):
+        self.quiz_active_bool = False
+        self.quiz_instance = None
+        print(self.quiz_active_bool, "= quiz_active_bool")
+        
     async def get_response(self, message):
         p_message = message.content.lower()
 

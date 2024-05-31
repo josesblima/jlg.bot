@@ -4,6 +4,7 @@ import asyncio
 
 class Quiz:
     def __init__(self):
+        from get_response import Responder
         self.active_quiz = None
         self.timer_sleep = False
         self.correct_answer_users_set = set()
@@ -13,6 +14,7 @@ class Quiz:
         self.end = False
         self.quiz_len = 2
         self.db = Database()
+        self.responder = Responder()
         self.challenge_wait = False
         self.challenge_stake = None
         self.challengers = ['','']
@@ -26,14 +28,20 @@ class Quiz:
             if message.author in self.total_scores:
                 self.total_scores[message.author] += 1
                 if self.total_scores[message.author] == self.quiz_len:
-                    return f'Quiz ended, congratulations {message.author}, you reached 10 points and are now the {self.challenge_level} Master for the next hour!\n{self.db.xpgold_update(message.author, 1, self.challenge_stake)}'
+                    msg = f'Quiz ended, congratulations {message.author}, you reached 10 points and are now the {self.challenge_level} Master for the next hour!\n{self.db.xpgold_update(message.author, int((self.challenge_stake) * 2), self.challenge_stake)}'
+                    self.challenge_wait = False
+                    self.challenge_stake = None
+                    self.challengers = ['','']
+                    self.challenge_level = None
+                    print(self.responder.quiz_active_bool_toggle())
+                    return msg
             else:
                 self.total_scores[message.author] = 1
 
             return f'{message.author} got it right!\n{self.db.xpgold_update(message.author, 1, 0)}\n{self.active_quiz.get_question()}'
 
     async def quiz_handler(self, message):
-        if self.ongoing_challenge == True:
+        if self.challenge_stake != None:
             return self.challenge_quiz_handler(message)
         p_message = message.content.lower()
         if self.active_quiz.check_answer(message) == True:
@@ -116,7 +124,6 @@ class Quiz:
                 self.challengers.append(message.author)
                 self.db.xpgold_update(self.challengers[0], 0, -(self.challenge_stake))
                 self.db.xpgold_update(self.challengers[1], 0, -(self.challenge_stake))
-                self.ongoing_challenge = True
                 if (self.challenge_level == 'n5'):
                     self.active_quiz = Questions()
                     print("quiz_starter\n")
